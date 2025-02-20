@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "storybook": "storybook dev -p 6060",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "test:vrt:screenshots": "playwright test --update-snapshots",
+    "test:vrt:compare": "playwright test"
   },
   "dependencies": {
     "init": "^0.1.2",
