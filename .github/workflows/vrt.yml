@@ -19,26 +19,26 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version-file: .node-version
-      - uses: npm/action-setup@v2
+      - uses: pnpm/action-setup@v2
         with:
           version: 8.9.2
           run_install: false
-      - name: Get npm store directory
-        id: npm-cache
-        run: echo "STORE_PATH=$(npm store path)" >> $GITHUB_OUTPUT
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        run: echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
       - uses: actions/cache@v3
-        name: Setup npm cache
+        name: Setup pnpm cache
         with:
-          path: ${{ steps.npm-cache.outputs.STORE_PATH }}
-          key: ${{ runner.os }}-npm-store-${{ hashFiles('**/npm-lock.yaml') }}-setup-npm
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}-setup-pnpm
           restore-keys: |
-            ${{ runner.os }}-npm-store-setup-npm
-      - run: npm install
+            ${{ runner.os }}-pnpm-store-setup-pnpm
+      - run: pnpm install
         shell: bash
-      - run: npm test:vrt:screenshots
+      - run: pnpm test:vrt:screenshots
         env:
           BASE_URL: https://insert-practice.vercel.app/
-      - run: npm test:vrt:compare
+      - run: pnpm test:vrt:compare
         env:
           BASE_URL: ${{ github.event.deployment_status.environment_url }}
       - name: Upload failed screenshots
