@@ -1,27 +1,15 @@
-import { useEffect, useRef } from "react";
+import clsx from "clsx";
 import styles from "./index.module.scss";
 
-export const Presenter: React.FC = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
-    const handleWheel = (e: WheelEvent) => {
-      if (containerRef.current === null) return;
-      // x軸のスクロールの方が大きい場合はスクロールしない
-      if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
-      e.preventDefault();
-      containerRef.current.scrollBy({
-        left: e.deltaY,
-        behavior: "auto",
-      });
-    };
+type Props = {
+  containerRef: React.RefObject<HTMLDivElement | null>;
+  handleReturnHome: (isSmooth: boolean) => void;
+};
 
-    window.addEventListener("wheel", handleWheel, { passive: false });
-
-    return () => {
-      window.removeEventListener("wheel", handleWheel);
-    };
-  }, []);
-
+export const Presenter: React.FC<Props> = ({
+  containerRef,
+  handleReturnHome,
+}) => {
   return (
     <div className={styles.transVerticalScroll}>
       <h1 className={styles.title}>縦スクロールを横スクロールに変換</h1>
@@ -32,6 +20,18 @@ export const Presenter: React.FC = () => {
             要素{i}
           </div>
         ))}
+        <button
+          onClick={() => handleReturnHome(true)}
+          className={clsx(styles.somethingContent, styles.Button)}
+        >
+          トップに戻る(smooth)
+        </button>
+        <button
+          onClick={() => handleReturnHome(false)}
+          className={clsx(styles.somethingContent, styles.Button)}
+        >
+          トップに戻る(instant)
+        </button>
       </div>
     </div>
   );

@@ -29,6 +29,7 @@
   height: 100%;
   border-radius: 20px;
   background-color: red;
+  text-align: center;
   // 3の倍数の子要素の時に背景を青にする
   &:nth-child(3n) {
     background-color: blue;
@@ -37,5 +38,8 @@
   &:nth-child(3n + 1) {
     background-color: green;
   }
-  text-align: center;
+
+  &.Button {
+    background-color: yellow;
+  }
 }
