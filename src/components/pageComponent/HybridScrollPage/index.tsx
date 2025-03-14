@@ -24,7 +24,7 @@ export const HybridScrollPage: React.FC = () => {
     const stickySections = [
       ...document.querySelectorAll(`.${styles.stickyWrapper}`),
     ];
-    console.log(stickySections);
+
     window.addEventListener("scroll", () => {
       stickySections.forEach((stickySection) => {
         transform(stickySection);
