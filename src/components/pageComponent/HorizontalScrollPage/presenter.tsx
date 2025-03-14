@@ -25,7 +25,7 @@ export const Presenter: React.FC<Props> = ({
           onChange={(e) => setAllowVerticalScroll(e.target.checked)}
         />
       </div>
-      <div ref={containerRef2} className={styles.scroll}>
+      <div ref={containerRef} className={styles.scroll}>
         {/* 要素を文言を変えて20個配置 */}
         {Array.from({ length: 20 }, (_, i) => (
           <div key={i} className={styles.somethingContent}>
@@ -45,7 +45,7 @@ export const Presenter: React.FC<Props> = ({
           トップに戻る(instant)
         </button>
       </div>
-      <div ref={containerRef} className={styles.scroll}>
+      <div ref={containerRef2} className={styles.scroll}>
         {/* 要素を文言を変えて20個配置 */}
         {Array.from({ length: 20 }, (_, i) => (
           <div key={i} className={styles.somethingContent}>
