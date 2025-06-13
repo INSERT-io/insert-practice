@@ -33,5 +33,5 @@ jobs:
           fi
 
           git add .
-          git commit -m --allow-empty "Auto commit by ${{ github.actor }}"
+          git commit --allow-empty -m "Auto commit by ${{ github.actor }}"
           git push
