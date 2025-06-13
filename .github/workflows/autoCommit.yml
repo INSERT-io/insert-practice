@@ -36,4 +36,4 @@ jobs:
           git commit --allow-empty -m "Auto commit by ${{ github.actor }}"
           git push
         env:
-          GITHUB_TOKEN: ${{ secrets.AUTH_TOKEN }}
+          AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
