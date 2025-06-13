@@ -32,12 +32,14 @@ jobs:
             echo "Committing changes as bot"
             git config --global user.name "github-actions[bot]"
             git config --global user.email "github-actions[bot]@users.noreply.github.com"
+            git add .
+            git commit --allow-empty -m "Auto commit by github-actions[bot]"
           else
             echo "Committing changes as user"
             git config --global user.name "${{ github.actor }}"
             git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+            git add .
+            git commit --allow-empty -m "Auto commit by ${{ github.actor }}"
           fi
 
-          git add .
-          git commit --allow-empty -m "Auto commit by ${{ github.actor }}"
           git push
