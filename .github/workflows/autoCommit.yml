@@ -6,7 +6,8 @@ on:
       botCommit:
         description: "commit by bot"
         required: true
-        default: "false"
+        default: false
+        type: boolean
   push:
 
 jobs:
