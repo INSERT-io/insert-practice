@@ -21,6 +21,8 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Commit changes
+        env:
+          AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
         run: |
           if [ "${{ github.event.inputs.botCommit }}" == "true" ]; then
             echo "Committing changes as bot"
@@ -35,5 +37,3 @@ jobs:
           git add .
           git commit --allow-empty -m "Auto commit by ${{ github.actor }}"
           git push
-        env:
-          AUTH_TOKEN: ${{ secrets.AUTH_TOKEN }}
