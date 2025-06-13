@@ -1,0 +1,36 @@
+name: commit practice
+
+on:
+  workflow_dispatch:
+    inputs:
+      botCommit:
+        description: "commit by bot"
+        required: true
+        default: "false"
+
+jobs:
+  autoCommit:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: ${{ github.workflow }}-${{ github.ref }}
+      cancel-in-progress: true
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Commit changes
+        run: |
+          if [ "${{ github.event.inputs.botCommit }}" == "true" ]; then
+            echo "Committing changes as bot"
+            git config --global user.name "github-actions[bot]"
+            git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          else
+            echo "Committing changes as user"
+            git config --global user.name "${{ github.actor }}"
+            git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+          fi
+
+          git add .
+          git commit -m "Auto commit by ${{ github.actor }}"
+          git push
